@@ -19,7 +19,7 @@ while (i <= 20.0):
 	#arr.append([x - random.uniform(-1.0, 1.0), y + random.uniform(-1.0, 1.0)])
 	i += 0.2
 
-file = open('/Users/nhonitus/Desktop/input1.txt', 'w')
+file = open('/Users/nhonitus/Documents/Computer Vision/GradientDescent/input1.txt', 'w')
 
 for i in arr:
 	file.write(repr(i[0]) + '\n')
