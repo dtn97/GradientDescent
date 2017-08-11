@@ -32,12 +32,11 @@ def JFunction(theta, features, target):
 	for i in range (0, n):
 		diff = cal(theta, features[i]) - target[i]
 		sum += diff * diff
-	return sum / (2 * (n))
-
+	return (sum) / (2 * (n))
 
 def gradientDescent(theta, features, target):
-	alpha = 0.00002775
-	eps = 0.0000001
+	alpha = 0.0000002
+	eps = 0.01
 	n = len(target)
 	m = len(theta)
 	file = open('/Users/nhonitus/Documents/Computer Vision/GradientDescent/error.txt', 'w')
@@ -45,11 +44,11 @@ def gradientDescent(theta, features, target):
 		newtheta = []
 		for i in theta:
 			newtheta.append(i)
-		for i in range(0, n):
-			diff = cal(newtheta, features[i]) - target[i]
-			diff *= alpha
 		for j in range(0, m):
-			newtheta[j] -= diff * features[i][j] / (n)
+			diff = 0
+			for i in range (0, n):
+				diff += (cal(newtheta, features[i]) - target[i]) * alpha * features[i][j]
+			newtheta[j] -= diff / n
 		file.write(repr(JFunction(newtheta, features, target)) + '\n')
 		error = math.fabs(JFunction(theta, features, target) - JFunction(newtheta, features, target))
 		if error < eps:
