@@ -1,7 +1,7 @@
 import math
 
 def readFile():
-	file = open('/Users/nhonitus/Documents/Computer Vision/GradientDescent/input.txt', 'r')
+	file = open('/Users/nhonitus/Documents/Computer Vision/GradientDescent/input1.txt', 'r')
 	a = []
 	for line in file:
 		a.append(float(line))
@@ -15,7 +15,8 @@ def getTrainingDataSet(arr):
 	features = []
 	target = []
 	for i in arr:
-		features.append([i[0] * i[0] * i[0], i[0] * i[0], i[0], 1])
+		#features.append([i[0] * i[0] * i[0], i[0] * i[0], i[0], 1])
+		features.append([i[0] * i[0] * i[0] * i[0], i[0] * i[0] * i[0], i[0] * i[0], i[0], 1])
 		target.append(i[1])
 	return features, target
 
@@ -35,11 +36,12 @@ def JFunction(theta, features, target):
 	return (sum) / (2 * (n))
 
 def gradientDescent(theta, features, target):
-	alpha = 0.0000002
-	eps = 0.01
+	#alpha = 0.0000002
+	alpha = 0.0025
+	eps = 0.00001
 	n = len(target)
 	m = len(theta)
-	file = open('/Users/nhonitus/Documents/Computer Vision/GradientDescent/error.txt', 'w')
+	#file = open('/Users/nhonitus/Documents/Computer Vision/GradientDescent/error.txt', 'w')
 	while (True):
 		newtheta = []
 		for i in theta:
@@ -49,10 +51,11 @@ def gradientDescent(theta, features, target):
 			for i in range (0, n):
 				diff += (cal(newtheta, features[i]) - target[i]) * alpha * features[i][j]
 			newtheta[j] -= diff / n
-		file.write(repr(JFunction(newtheta, features, target)) + '\n')
+		#file.write(repr(JFunction(newtheta, features, target)) + '\n')
+		print(JFunction(newtheta, features, target), '\n')
 		error = math.fabs(JFunction(theta, features, target) - JFunction(newtheta, features, target))
 		if error < eps:
-			file.close()
+			#file.close()
 			return newtheta
 		for i in range(0, m):
 			theta[i] = newtheta[i]
